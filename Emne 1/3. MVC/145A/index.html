@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div.square {
+            border: 1px solid gray
+        }
+
+        div.board {
+            display: grid;
+            grid-template-columns: repeat(2, 10rem);
+            grid-template-rows: repeat(2, 10rem);
+        }
+
+        div.buttons {
+            width: 20rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        img {
+            width: 90%;
+        }
+
+        div.square {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    DRY-prinsippet
+    Don't Repeat Yourself
+
+    <h3>
+        JavaScript
+    </h3>
+    <li>Endre HTML av en tag ut fra id</li>
+    <li>Lage egne kommandoer, dvs. funksjoner</li>
+    <li>onclick</li>
+
+    <div id="app">
+    </div>
+
+    <script>
+        let index = 1
+        updateView();
+
+        function updateView() {
+            let imghtml = '<img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png" />'
+            let img1html = ""
+            let img2html = ""
+            let img3html = ""
+            let img4html = ""
+            let disabledUp = ""
+            let disabledDown = ""
+            let disabledRight = ""
+            let disabledLeft = ""
+            if (index == 1) {
+                img1html = imghtml
+                disabledUp = "disabled"
+                disabledLeft = "disabled"
+            }
+            if (index == 2){
+                img2html = imghtml
+                disabledRight="disabled"
+                disabledUp="disabled"
+            } 
+            if (index == 3){
+                img3html = imghtml
+                disabledLeft="disabled"
+                disabledDown="disabled"
+            } 
+            if (index == 4){
+                img4html = imghtml
+                disabledRight="disabled"
+                disabledDown="disabled"
+            } 
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <div class="board">
+                <div class="square">
+                    ${img1html}
+                </div>
+                <div class="square">
+                    ${img2html}
+                </div>
+                <div class="square">
+                    ${img3html}
+                </div>
+                <div class="square">
+                    ${img4html}
+                </div>
+            </div>
+            <div class="buttons">
+                <button onclick="moveButtons('up')"${disabledUp}>▲</button>
+                <div>
+                    <button onclick="moveButtons('left')"${disabledLeft}>◀</button>
+                    <button onclick="moveButtons('right')"${disabledRight}>▶</button>
+                </div>
+                <button onclick="moveButtons('down')"${disabledDown}>▼</button>
+            </div>
+            `;
+        }
+
+        // function right() {
+        //     index++;
+        //     updateView()
+        // }
+        // function left() {
+        //     index--;
+        //     updateView()
+        // }
+        // function up() {
+        //     index -= 2;
+        //     updateView()
+        // }
+        // function down() {
+        //     index += 2;
+        //     updateView()
+        // }
+
+        function moveButtons(direction){
+            if (direction === "right") {
+                index ++;
+            }
+            else if (direction === "left") {
+                index--;
+            } 
+            else if (direction === "up") {
+                index-=2;
+            }
+            else if (direction === "down") {
+                index+=2;
+            }
+            updateView();
+
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+
+    <script>
+
+        let points = 0;
+        let questionnumber = 1;
+
+        updateView();
+        function updateView() {
+            let question, option1, option2, option3;
+            if (questionnumber == 1) {
+                question = 'Hva slags utdanning har du?';
+                option1 = 'Lite eller ingenting';
+                option2 = 'Bachelor';
+                option3 = 'Master eller mer';
+            } else if (questionnumber == 2) {
+                question = 'Hvor lang erfaring har du?';
+                option1 = '< 3 år>';
+                option2 = '3-7 år';
+                option3 = '> 7 år';
+            }
+            else {
+                document.getElementById('app').innerHTML = /*HTML*/`
+                    Takk du fikk ${points} poeng.
+                    <button onclick="restart()">Start på nytt</button>
+            `;
+                return;
+            }
+
+
+            document.getElementById('app').innerHTML = /*HTML*/`
+            
+                <h1>${question}</h1>
+                <button onclick="nextQuestion(0)">${option1}</button><br/>
+                <button onclick="nextQuestion(1)">${option2}</button><br/>
+                <button onclick="nextQuestion(2)">${option3}</button><br/>
+            `;
+        }
+
+        function nextQuestion(gainedPoints) {
+            points += gainedPoints;
+            questionnumber++;
+            updateView();
+
+        }
+
+        function restart() {
+            points = 0;
+            questionnumber = 1;
+            updateView();
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+
+
+</head>
+
+<body>
+    <div id="leilighet">
+    </div>
+    <div>
+
+
+        <script>
+            Inngang();
+            function Inngang() {
+                document.getElementById('leilighet').innerHTML = /*HTML*/`
+                Du er utenfor en leilighet
+                <button onclick='Gangen()'> Gå inn</button>
+                
+                    `;
+            }
+            function Gangen() {
+                document.getElementById('leilighet').innerHTML = /*HTML*/`
+                Du er i gangen
+                <button onclick='Inngang()'>
+                    Gå ut
+                </button>
+                <button onclick='stue()'>
+                    Gå inn til stua
+                </button>
+                <button onclick='soverom()'>
+                    Gå inn på soverommet
+                </button>
+                <button onclick='bad()'>
+                    Gå inn på badet
+                </button>
+            `;
+            }
+
+            function stue() {
+                document.getElementById('leilighet').innerHTML = /*HTML*/`
+                Du er i stua
+                <button onclick='Gangen()'> Gå tilbake til gangen</button>
+                <button onclick='bad()'> Gå på badet</button>
+                    `;
+            }
+            function soverom() {
+                document.getElementById('leilighet').innerHTML = /*HTML*/`
+                Du er på soverommet
+                <button onclick='Gangen()'> Gå tilbake til gangen</button>
+                    `;
+            }
+            function bad() {
+                document.getElementById('leilighet').innerHTML = /*HTML*/`
+                Du er på badet
+                <button onclick='Gangen()'> Gå tilbake til gangen</button>
+                <button onclick='stue()'> Gå til stua</button>
+                    `;
+            }
+        </script>
+    </div>
+</body>
+
+</html>

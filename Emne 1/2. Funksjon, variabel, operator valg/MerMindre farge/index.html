@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <style>
+        #mainDiv{
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+
+    
+    <script>
+        
+        let red = 50;
+        let green = 10;
+        let blue = 30;
+        
+        updateView();
+        function updateView(){
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <div id="mainDiv" style="background-color: rgb( ${red}, ${green}, ${blue});"></div>
+            <button onclick="changeColor(5, 0, 0)">Mer Rødt</button>
+            <button onclick="changeColor(-5, 0, 0)">Mindre Rødt</button>
+            ${red} <br/>
+
+            <button onclick="changeColor(0, 5, 0)">Mer Grønt</button>
+            <button onclick="changeColor(0, -5, 0)">Mindre Grønt</button>
+            ${green} <br/>
+
+            <button onclick="changeColor(0, 0, 5)">Mer Blått</button>
+            <button onclick="changeColor(0, 0, -5)">Mindre Blått</button>
+            ${blue} <br/>
+
+            <button onclick="changeColor(5, 5, 5)">Lysere</button>
+            <button onclick="changeColor(-5, -5, -5)">Mørkere</button>
+
+
+            
+            
+            `;
+        }
+
+        function changeColor(changeRed, changeGreen, changeBlue){
+            red += changeRed;
+            green += changeGreen;
+            blue += changeBlue;
+            updateView();           
+        }
+
+
+
+    </script>
+    
+</body>
+</html>

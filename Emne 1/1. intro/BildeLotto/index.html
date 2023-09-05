@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #board {
+            display: grid;
+            grid-template-columns: repeat(4, 200px);
+            grid-template-rows: repeat(4, 200px);
+        }
+
+        #board>div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid gray;
+            background-color: darkgray;
+        }
+
+        img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="board">
+    </div>
+    <script>
+        showAllHidden();
+        function showAllHidden() {
+            document.getElementById('board').innerHTML = /*HTML*/`
+            <div onclick="showDog1()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showDog2()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            `;
+        }
+
+        function showDog1() {
+            document.getElementById('board').innerHTML = /*HTML*/`
+            <div><img src="img/dog.jpg" /></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showBothDogs()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            `;
+        }
+        function showDog2() {
+            document.getElementById('board').innerHTML = /*HTML*/`
+            <div onclick="showBothDogs()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div><img src="img/dog.jpg" /></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            `;
+        }
+
+        function showBothDogs() {
+            document.getElementById('board').innerHTML = /*HTML*/`
+            <div><img src="img/dog.jpg" /></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div><img src="img/dog.jpg" /></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            <div onclick="showAllHidden()"></div>
+            `;
+        }
+
+    </script>
+</body>
+
+</html>

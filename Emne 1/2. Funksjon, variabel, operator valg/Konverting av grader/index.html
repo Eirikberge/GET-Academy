@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="num"></label>
+    <input type="number" id="num">
+
+    <button onclick="toCelcius()">Fra Fahrenheit til celsius</button>
+    <button onclick="toFahreinheit()">Fra celcius til Fahrenheit</button>
+
+    <p id="result"></p>
+
+    <script>
+        function toCelcius(){
+            let num = parseFloat(document.getElementById('num').value);
+            let result = ((5/9) * (num - 32));
+            document.getElementById('result').textContent = "Grader celcius:" + result;
+            
+        }
+        function toFahreinheit(){
+            let num = parseFloat(document.getElementById('num').value);
+            let result = (num * (1.8) + 32);
+            document.getElementById('result').textContent = "Grader Fahrenheit:" + result;
+
+        }
+    </script>
+    
+</body>
+</html>

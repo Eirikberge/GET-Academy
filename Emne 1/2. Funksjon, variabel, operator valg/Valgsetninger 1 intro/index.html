@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+
+        drawForm();
+
+        function drawForm(){
+            // drawTextField('fname', 'First Name');
+            // drawTextField('fname', 'Last Name');
+            // drawRangeField('zero2hundred', 'En til hundre');
+            drawField('fname', 'First Name', 'text');
+            drawField('fname', 'Last Name', 'text');
+            drawField('zero2hundred', 'En til hundre', 'range');
+            drawField('fname', 'Skriv inn et tall', 'number');
+            drawField('html', 'HTML', 'radio', 'fav_language');
+            drawField('css', 'CSS', 'radio', 'fav_language');
+            drawField('js', 'JavaScript', 'radio', 'fav_language');
+
+        }
+
+        function drawField(id, label, type, radioGroupName) {
+            let minMaxStep = '';
+            let breakTag = '<br/>';
+            let labelTag = `<label for="${id}">${label}:</label`;
+            let fieldTag = `<input type="${type}" ${minMaxStep} id="${id}">`;
+            if(type=='range'){
+                minMaxStep = 'min="1" max="100" step="1"';
+            }
+            let html = label + breakTag + fieldTag + breakTag;
+            if(type == 'radio'){
+                html = /*html*/` 
+                    <input type="${type}" name="${radioGroupName}" id="${id}">
+                    <label for="${id}">${label}</label>
+                    <br/>
+                    `;
+            }
+            document.getElementById('app').innerHTML += html;
+        }
+
+
+
+    </script>
+
+<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+<label for="vehicle1"> I have a bike</label><br/>
+<input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+<label for="vehicle2"> I have a car</label><br/>
+<input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+<label for="vehicle3"> I have a boat</label><br/>
+
+<!-- 
+    <input type="radio" id="html" name="fav_language" value="HTML">
+    <label for="html">HTML</label><br/>
+    <input type="radio" id="CSS" name="fav_language" value="CSS">
+    <label for="html">CSS</label><br/>
+    <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+    <label for="html">JavaScript</label><br/> -->
+
+</body>
+</html>

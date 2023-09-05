@@ -1,0 +1,43 @@
+body {
+    margin-left:20px;
+}
+
+.card {
+    background-color: lightgray;
+    border: 1px solid darkgray;
+    width: 500px;
+    margin: 10px;
+}
+
+.innercard{
+    padding:10px
+}
+
+.header {
+    color: white;
+    text-align: center;
+    font-size: x-large;
+    padding: 1% 0;
+    border: 1px solid gray;
+    user-select: none;
+}
+
+.green {
+    background-color: green;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.red {
+    background-color: red;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.dark {
+    background-color: darkgray;
+}

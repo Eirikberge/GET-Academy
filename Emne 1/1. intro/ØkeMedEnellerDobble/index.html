@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #number {
+            font-size: 50px;
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="number">
+    </div>
+
+
+    <div>
+        <script>
+            show1();
+            function show1() {
+                document.getElementById('number').innerHTML = /*HTML*/`
+                1 
+                <button onclick='show2()'>Øke med en</button>
+                <button onclick='show2()'>Øke med dobbelt</button>
+                    
+                `;
+            }
+
+            function show2() {
+                document.getElementById('number').innerHTML = /*HTML*/`
+                2
+                <button onclick='show3()'>Øke med en</button>
+                <button onclick='show4()'>Øke med dobbelt</button>
+                <button onclick='show1()'>Dele på to</button>
+
+                `;
+            }
+
+
+            function show3() {
+                document.getElementById('number').innerHTML = /*HTML*/`
+                3
+                <button onclick='show4()'>Øke med en</button>
+                <button onclick='show6()'>Øke med dobbelt</button>
+
+
+                `;
+            }
+
+            function show4() {
+                document.getElementById('number').innerHTML = /*HTML*/`
+                4
+                <button onclick='show5()'>Øke med en</button>
+                <button onclick='show8()'>Øke med dobbelt</button>
+                <button onclick='show2()'>Dele på to</button>
+
+                `;
+            }
+
+            function show5() {
+                document.getElementById('number').innerHTML = /*HTML*/`
+                5
+                Ferdig
+                <button onclick='show1()'>Tilbake til start</button>
+
+                `;
+            }
+
+            function show8() {
+                document.getElementById('number').innerHTML = /*HTML*/`
+                8
+                <button onclick='show10()'>Øke med en</button>
+                <button onclick='show10()'>Øke med dobbelt</button>
+                <button onclick='show4()'>Dele på to</button>
+
+                `;
+            }
+            function show10() {
+                document.getElementById('number').innerHTML = /*HTML*/`
+                10
+                Ferdig
+                <button onclick='show1()'>Tilbake til start</button>
+
+                `;
+            }
+
+        </script>
+
+
+    </div>
+
+</body>
+
+</html>

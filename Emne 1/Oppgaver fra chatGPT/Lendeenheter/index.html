@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <label for="unit">Lengde</label>
+    <input type="number" id="amount" min="0">
+
+    <label for="fromUnit">Fra enhet</label>
+    <select id="fromUnit">
+        <option value="meter">meter</option>
+        <option value="fot">fot</option>
+        <option value="tommer">tommer</option>
+    </select>
+
+    <label for="toUnit">Til enhet</label>
+    <select id="toUnit">
+        <option value="meter">meter</option>
+        <option value="fot">fot</option>
+        <option value="tommer">tommer</option>
+    </select>
+
+    <button onclick="convert()">Konverter</button>
+
+    <script>
+
+        function convert() {
+            const length = parseFloat(document.getElementById(length).value);
+            const fromUnit = document.getElementById('fromUnit');
+            const toUnit = document.getElementById('toUnit');
+            let convertedLength = 0;
+            
+        }
+
+    </script>
+
+
+</body>
+
+</html>
