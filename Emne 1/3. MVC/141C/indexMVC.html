@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // model
+        let backColor = 'white';
+        let foreColor = 'black';
+
+
+        // View
+        updateView()
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            
+            <h4>Velg bakgrunnsfarge</h4>
+                <label for="backgroundToText">Velg bakgrunnsfarge</label>
+                <select id="backgroundToText" onchange="updateBackgroundColor(this.value)">
+                    <option value="white">Hvit</option>
+                    <option value="red">Rød</option>
+                    <option value="green">Grønn</option>
+                    <option value="blue">Blå</option>
+                </select>
+
+            <h4>Velg forgrunnsfarge</h4>
+                <label for="foregroundToText">Velg forgrunnsfarge</label>
+                <select id="foregroundToText" onchange="updateForegroundColor(this.value)">
+                    <option value="black">Svart</option>
+                    <option value="red">Rød</option>
+                    <option value="green">Grønn</option>
+                    <option value="blue">Blå</option>
+                    <option value="yellow">Gul</option>
+                    <option value="orange">Orange</option>
+
+                </select>
+                <br />
+
+            <button onclick="addNewDiv()">Få beskjed</button>
+             `
+
+        }
+        // Controller
+        function addNewDiv() {
+            const newDiv = document.createElement('div');
+
+            newDiv.textContent = 'Heihei, God dag!';
+
+            newDiv.style.backgroundColor = backColor;
+            newDiv.style.color = foreColor;
+
+            document.getElementById('app').appendChild(newDiv);
+
+
+        }
+
+        function updateBackgroundColor(color) {
+            document.getElementById('app').style.backgroundColor = backColor;
+
+            if (color !== foreColor) {
+                backColor = color;
+                updateView();
+            }
+            else {
+                alert("Bakgrunnsfargen kan ikke være den samme som forgrunnsfargen. Velg en annen farge.");
+            }
+        }
+        function updateForegroundColor(color) {
+            document.getElementById('app').style.forgroundColor = foreColor;
+
+            if (color !== backColor) {
+                foreColor = color;
+                updateView();
+            }
+            else {
+                alert("Forgrunnsfargen kan ikke være den samme som bakgrunnsfargen. Velg en annen farge.");
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

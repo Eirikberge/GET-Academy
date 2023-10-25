@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+            .board{
+
+                display: grid;
+                grid-template-columns: repeat(3, 100px); 
+                grid-template-rows: repeat(3, 100px);
+                align-items: center;
+ 
+            }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script>
+        // model
+        let board = '   oxxox ';
+        let html = "";
+        // view
+        updateView();
+        function updateView() {
+            html += getSquareElement(0)
+            + getSquareElement(1)
+            + getSquareElement(2)
+            + getSquareElement(3)
+            + getSquareElement(4)
+            + getSquareElement(5)
+            + getSquareElement(6)
+            + getSquareElement(7)
+            + getSquareElement(8);
+            document.getElementById('app').innerHTML = html;
+ 
+        }
+
+        // controller
+        function getSquareElement(index){
+            return /*HTML*/`
+            <div>${board.charAt(index)}</div>
+            `;
+        }
+
+    </script>
+</body>
+
+</html>

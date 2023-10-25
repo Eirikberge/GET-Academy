@@ -32,10 +32,19 @@
             align-items: center;
             justify-content: center;
         }
-    </style>
+    </style>z
 </head>
 
 <body>
+    DRY-prinsippet
+    Don't Repeat Yourself
+
+    <h3>
+        JavaScript
+    </h3>
+    <li>Endre HTML av en tag ut fra id</li>
+    <li>Lage egne kommandoer, dvs. funksjoner</li>
+    <li>onclick</li>
 
     <div id="app">
     </div>
@@ -45,6 +54,38 @@
         updateView();
 
         function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <div class="board">
+                <div class="square">
+                    ${squareContentWithButtons(1)}
+                </div>
+                <div class="square">
+                    ${squareContentWithButtons(2)}
+                </div>
+                <div class="square">
+                    ${squareContentWithButtons(3)}
+                </div>
+                <div class="square">
+                    ${squareContentWithButtons(4)}
+                </div>
+            </div>
+            <div class="buttons">
+                <button onclick="moveButtons(-2)"${disabledUp}>▲</button>
+                <div>
+                    <button onclick="moveButtons(-1)"${disabledLeft}>◀</button>
+                    <button onclick="moveButtons(1)"${disabledRight}>▶</button>
+                </div>
+                <button onclick="moveButtons(2)"${disabledDown}>▼</button>
+            </div>
+            `;
+        }
+
+        function moveButtons(change){
+            index += change;
+            updateView();
+        }
+
+        function squareContentWithButtons(index){
             let imghtml = '<img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png" />'
             let img1html = ""
             let img2html = ""
@@ -74,35 +115,6 @@
                 disabledRight="disabled"
                 disabledDown="disabled"
             } 
-            document.getElementById('app').innerHTML = /*HTML*/`
-            <div class="board">
-                <div class="square">
-                    ${img1html}
-                </div>
-                <div class="square">
-                    ${img2html}
-                </div>
-                <div class="square">
-                    ${img3html}
-                </div>
-                    <div class="square">
-                        ${img4html}
-                    </div>
-            </div>
-            <div class="buttons">
-                <button onclick="moveButtons(-2)"${disabledUp}>▲</button>
-                <div>
-                    <button onclick="moveButtons(-1)"${disabledLeft}>◀</button>
-                    <button onclick="moveButtons(1)"${disabledRight}>▶</button>
-                </div>
-                <button onclick="moveButtons(2)"${disabledDown}>▼</button>
-            </div>
-            `;
-        }
-
-        function moveButtons(change){
-            index += change;
-            updateView();
         }
 
         // function right() {
@@ -120,6 +132,23 @@
         // function down() {
         //     index += 2;
         //     updateView()
+        // }
+
+        // function moveButtons(direction){
+        //     if (direction === "right") {
+        //         index ++;
+        //     }
+        //     else if (direction === "left") {
+        //         index--;
+        //     } 
+        //     else if (direction === "up") {
+        //         index-=2;
+        //     }
+        //     else if (direction === "down") {
+        //         index+=2;
+        //     }
+        //     updateView();
+
         // }
 
     </script>

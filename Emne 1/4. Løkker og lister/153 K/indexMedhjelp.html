@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .clicked {
+            stroke: black;
+            stroke-width: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+    </div>
+
+    <script>
+        // model
+        let numbers = [7, 3, 1, 5, 4];
+        let chosenBar; // Variabel for hvilken stolpe som er valgt
+        let inputValue; // Variabel for hva som er skrevet i input-feltet
+
+        // view
+        updateView();
+        function updateView() {
+            let svgInnerHtml = '';
+            for (let i = 0; i < numbers.length; i++) {
+                svgInnerHtml += createBar(numbers[i], i + 1);
+            }
+            let chosenBarText = "";
+            if (chosenBar != null) {
+                chosenBarText = chosenBar;
+            }
+            let disabledChangeBtn = "";
+            let disabledRemoveBtn = "";
+            if (chosenBar == null) {
+                disabledChangeBtn = "disabled"
+                disabledRemoveBtn = "disabled"
+            }
+            document.getElementById('content').innerHTML = /*HTML*/`
+                <svg id="chart" width="500" viewBox="0 0 80 60">
+                    ${svgInnerHtml}
+                </svg><br/>
+                Valgt stolpe: <i>${chosenBarText}</i>
+                <br />
+                Verdi:
+                <input id='userValueInput' type="number" min="1" max="10" oninput="inputValue = this.value" />
+                <button onclick="createNewBar()">Legg til stolpe</button>
+                <button onclick="changeSelectedBar()"${disabledChangeBtn}>Endre valgt stolpe</button><br />
+                <button onclick="removeSelectedBar(${chosenBar})"${disabledRemoveBtn}>Fjerne valgt stolpe</button>
+            `
+
+        }
+
+        function createBar(number, barNo) {
+            const width = 8;
+            const spacing = 2;
+            let x = (barNo - 1) * (width + spacing);
+            let height = number * 10;
+            let y = 60 - height;
+            let color = calcColor(1, 10, barNo);
+            let chosenBarBorder = "";
+            if (chosenBar == barNo) {
+                chosenBarBorder = 'black'
+            }
+            return `<rect width="${width}" height="${height}"
+                                x="${x}" y="${y}" fill="${color}" stroke='${chosenBarBorder}' onclick="selectBar(${barNo})"></rect>`;
+        }
+
+        function calcColor(min, max, val) {
+            var minHue = 240, maxHue = 0;
+            var curPercent = (val - min) / (max - min);
+            var colString = "hsl(" + ((curPercent * (maxHue - minHue)) + minHue) + ",100%,50%)";
+            return colString;
+        }
+
+        // controller
+        function selectBar(barNo) {
+            if (chosenBar == barNo) {
+                chosenBar = null;
+            } else {
+                chosenBar = barNo;
+            }
+            updateView();
+        }
+
+        function createNewBar() {
+            numbers.push(inputValue);
+            updateView();
+        }
+        function removeSelectedBar() {
+            numbers.splice(chosenBar - 1, 1);
+            chosenBar = null;
+            updateView();
+        }
+        function changeSelectedBar() {
+    if (chosenBar != null) {
+        if (inputValue >= 1 && inputValue <= 10) {
+            numbers[chosenBar - 1] = inputValue;
+        } else {
+            alert("Velg et tall mellom 1 og 10!");
+        }
+    }
+    updateView();
+            //
+
+            // endre verdien som brukeren har skrevet i input-boksen. 
+            // Det er kun 1,2,3,4,5,6,7,8, 9 og 10 som er gyldige verdier. 
+            // Dersom brukeren ikke har skrevet en gyldig verdi i input-boksen, 
+            // skal det gis en feilmelding
+        }
+
+
+    </script>
+
+</body>
+
+</html>

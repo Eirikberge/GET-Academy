@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .square {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+        <div id="square" class="square"></div>
+
+        <script>
+        // model
+        let color1 = { red: 0, green: 255, blue: 0};
+        let color2 = invertColor(color1);
+
+        // view
+        setColor(color1);
+
+        function setColor(color) {
+            document.getElementById('square').style.backgroundColor = `rgb(${color.red}, ${color.green}, ${color.blue})`;
+            setColor(color2);
+        }
+
+        // controller
+
+        function invertColor(color) {
+            return {
+                red: 255 - color.red,
+                green: 255 - color.green,
+                blue: 255 - color.blue,
+            };
+        }
+
+    </script>
+</body>
+
+</html>

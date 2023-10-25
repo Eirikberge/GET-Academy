@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: white;
+            color: blue;
+            font-size: 50px;
+            margin: 4%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+    </div>
+
+    <script>
+
+        // model
+        let index = 1;
+
+        //View
+        updateView();
+        function updateView() {
+            let inBtn = createGoToRoomHtml(2, 'Gå inn');
+            let outBtn = createGoToRoomHtml(1, 'Gå ut');
+            let hallBtn = createGoToRoomHtml(2, 'Gå til gangen');
+            let livingRoomBtn = createGoToRoomHtml(3, 'Gå til stua');
+            let bedroomBtn = createGoToRoomHtml(4, 'Gå til soverommet');
+            let bathroomBtn = createGoToRoomHtml(5, 'Gå til badet');
+            if (index == '1') {
+                showHouse('utenfor leiligheten', inBtn);
+            } else if (index == '2') {
+                showHouse('i gangen', outBtn + livingRoomBtn + bedroomBtn + bathroomBtn);
+            } else if (index == '3') {
+                showHouse('i stua', hallBtn + livingRoomBtn + bathroomBtn);
+            } else if (index == '4') {
+                showHouse('på soverommet', hallBtn);
+            } else if (index == '5') {
+                showHouse('på badet', hallBtn + livingRoomBtn);
+            }
+        }
+
+        function showHouse(where, buttonsHtml){
+            document.getElementById('app').innerHTML = /*HTML*/`
+                <div>
+                    Du er ${where}
+                </div>
+                <div>
+                    ${buttonsHtml}
+                </div>
+                `;
+        }
+
+        function createGoToRoomHtml(goToRoomNo, text){
+            return /*HTML*/`<button onclick='moveAround(${goToRoomNo})'>${text}</button>`;
+        }
+
+        //controller
+        function moveAround(room) {
+            index = room
+            updateView();
+        }
+
+
+    </script>
+</body>
+
+</html>

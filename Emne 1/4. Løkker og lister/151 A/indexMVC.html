@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        
+        // model
+        let resultatTekst = "";
+        let tekst = "";
+        let maksLengde = "";
+        
+        // view
+        // Her er det ordnet "oninput".
+        updateView();
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+
+            <label for="putInWord">Skriv inn tekst:</label>
+            <input oninput="tekst=this.value" type="text" id="putInWord" placeholder="Skriv inn tekst her">
+
+            <label for="maksLengde">Maks. lengde:</label>
+            <input oninput="maksLengde=this.valueAsNumber" type="number" id="maksLengde" placeholder="Maks. lengde">
+
+            <br>
+            <button onclick="showText()">Gjenta</button>
+            <br>
+
+            ${resultatTekst}
+
+            `;
+        }
+
+        // controller
+        function showText() {
+            for (let i= 0; i < maksLengde; i++){
+                resultatTekst += tekst;
+            }
+            updateView()
+        }
+
+
+    </script>
+</body>
+
+</html>

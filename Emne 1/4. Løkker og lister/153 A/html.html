@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // model
+        const model = {
+            paging: { 
+
+            }
+        }
+
+        // view
+        updateView(0, 10);
+        function updateView(pageIndex, pageSize) {
+            let html = '';
+            const result = oneToThousand()
+            let skipCount = pageIndex * pageSize
+            let takeCount = pageSize;
+            for (let number of result) {
+                skipCount--;
+                if (skipCount >= 0) {
+                    continue;
+                }
+                if (takeCount <= 0) {
+                    break;
+                }
+                takeCount--;
+                html += /*HTML*/`
+                    <li>${number}</li>
+                `;
+            }
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <ul>
+                ${html}
+            </ul>    
+            `;
+
+        }
+
+        // controller
+        function oneToThousand() {
+            let numbers = [];
+            for (let i = 0; i < 1000; i++) {
+                numbers.push(i);
+            }
+            return numbers;
+        }
+
+
+    </script>
+</body>
+
+</html>

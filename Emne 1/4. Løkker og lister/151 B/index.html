@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // model
+        let startValue = 0;
+        let endValue = 0;
+        let change = 0;
+        let resultText = "";
+
+        // view
+        updateView();
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+
+                <label for="startValue">Start-verdi:</label>
+                <input oninput="startValue=this.valueAsNumber" type="number" id="startValue" placeholder="Skriv inn startverdi">
+
+                <label for="endValue">Slutt-verdi:</label>
+                <input oninput="endValue=this.valueAsNumber" type="number" id="endValue" placeholder="Skriv inn sluttverdi">
+
+                <label for="change">Endring:</label>
+                <input oninput="change=this.valueAsNumber" type="number" id="change" placeholder="Skriv inn endring">
+
+                <button onclick="count()">Tell</button>
+
+                <br>
+
+                <p>${resultText}</p>
+
+            `;
+
+        }
+
+        // controller
+        function count(){
+            resultText = "";
+            for (let i = startValue; i > endValue; i += change){
+                resultText += i + "<br>";
+            }
+        updateView();
+
+        }
+
+    </script>
+</body>
+
+</html>

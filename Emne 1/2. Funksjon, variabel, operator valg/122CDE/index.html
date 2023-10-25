@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #content {
+            font-size: 16pt;
+            margin: 20px;
+        }
+
+        button {
+            margin: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="app">
+    </div>
+
+    
+    <script>
+
+        //model
+        let fontSize = 16;
+        let redValue = 125;
+        let greenValue = 125;
+        let blueValue = 125;
+
+
+        //View
+        updateView()
+        function updateView(){
+            document.getElementById('app').innerHTML = /*HTML*/`
+
+            Dette er en tekst
+
+            <select id="userFontChoice" onchange="selectFontFamily(this.value)">
+        <option>Arial</option>
+        <option>Verdana</option>
+        <option>Tahoma</option>
+        <option>Trebuchet MS</option>
+        <option>Times New Roman</option>
+        <option>Georgia</option>
+        <option>Garamond</option>
+        <option>Courier New</option>
+        <option>Brush Script MT</option>
+            </select>
+            
+            <button onclick="changeFontSize(5)">Større</button>
+            <button onclick="changeFontSize(-5)">Mindre</button>
+            <button onclick="changeColors(50, 0 ,0)">Mer rød NY</button>
+            <button onclick="changeColors(0, 50 ,0)">Mer grønn NY</button>
+            <button onclick="changeColors(0, 0, 50)">Mer blå Ny</button>
+            `;
+            
+        }
+     
+        //controller
+
+        function changeFontSize(change) {
+            fontSize += change;
+            document.getElementById('app').style.fontSize = `${fontSize}pt`;
+        }
+
+        function selectFontFamily(){
+            let fontType = document.getElementById('userFontChoice').value
+            document.getElementById('app').style.fontFamily = `${fontType}`;
+            
+
+        }   
+
+        function changeColors(changeRed , changeGreen, changeBlue){
+            redValue += changeRed;
+            greenValue += changeGreen;
+            blueValue += changeBlue;
+            document.getElementById('app').style.backgroundColor =`rgb(${redValue}+${changeRed}, ${greenValue}, ${blueValue})`;
+        }
+
+        // avslutte alle funskjoner med updateView
+    </script>
+
+</body>
+
+</html>
+
+</html>

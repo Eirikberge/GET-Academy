@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // model
+        let numbers = [1, 2, 3]
+        // view
+        updateView();
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+
+            `;
+            
+        }
+
+        // controller
+        // en variabel til om den er sortert eller ikke
+        function isSorted(numbers){
+            
+            for (let i = 0; i < numbers.length; i++){
+                let currentValue = numbers[i];
+                let previousValue = numbers[i-1];
+                if(currentValue < previousValue){
+                    return false
+                }
+            }
+            return true
+            
+        }
+
+    </script>
+    <!-- isSorted([1,2,3]) // gir true
+    isSorted([1,20,3]) // gir false
+    Hvis tallet inne i løkken er mindre enn det forrige, så er ikke listen sortert -->
+
+</body>
+
+</html>

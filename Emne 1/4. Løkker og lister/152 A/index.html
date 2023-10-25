@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // model
+        let numbersList = [];
+
+        // view
+        updateView();
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <button onclick="giveNumbers()">Gi tall</button>
+            <ul>${numbersList.map(number => `<li>${number}</li>`).join('')}</ul>
+            `;
+        }
+
+        // controller
+        function giveNumbers(){
+            for (let i = 100; i <= 1000; i +=7){
+                numbersList.push(i);
+            }
+            updateView();
+        }
+
+        
+    </script>
+</body>
+
+</html>

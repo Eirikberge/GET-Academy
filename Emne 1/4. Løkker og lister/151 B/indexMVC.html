@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // model
+        let resultText = "";
+
+        // view
+        updateView();
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+
+                <!-- Input-felt for startverdi -->
+                <label for="startValue">Start-verdi:</label>
+                <input type="number" id="startValue" placeholder="Skriv inn startverdi">
+
+                <!-- Input-felt for sluttverdi -->
+                <label for="endValue">Slutt-verdi:</label>
+                <input type="number" id="endValue" placeholder="Skriv inn sluttverdi">
+
+                <!-- Input-felt for endring -->
+                <label for="change">Endring:</label>
+                <input type="number" id="change" placeholder="Skriv inn endring">
+
+                <button onclick="count()">Tell</button>
+
+                <br>
+
+                    ${resultText}
+
+
+            `;
+
+        }
+
+        // controller
+        function count(){
+        let startValue = parseInt(document.getElementById("startValue").value);
+        let endValue = parseInt(document.getElementById("endValue").value);
+        let change = parseInt(document.getElementById("change").value);
+        
+            if (isNaN(startValue) || isNaN(endValue) || isNaN(change)) {
+                resultText = "Vennligst fyll ut alle tallfeltene.";
+            } else if (change <= 0) {
+                resultText = "Endring må være et positivt tall.";
+            } else if (startValue > endValue && change > 0) {
+                resultText = "Start-verdi kan ikke være større enn slutt-verdi.";
+            } else if (startValue < endValue && change < 0) {
+                resultText = "Start-verdi kan ikke være mindre enn slutt-verdi.";
+            } else {
+                for (let i = startValue; (change > 0 ? i <= endValue : i >= endValue); i += change) {
+                    resultText += i + "<br>";
+                }
+            }
+            updateView();
+        }
+
+    </script>
+</body>
+
+</html>

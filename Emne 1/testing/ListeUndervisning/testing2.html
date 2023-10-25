@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // model
+        let nrList = [1, 2, 3, 4, 5, 6]
+        // view
+        updateView();
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <button onclick="calcNr()">Klikk</button>
+            `;
+            
+        }
+
+        // controller
+        function calcNr(){
+            
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="printText()">Print</button>
+    <script>
+        let text = "Eirik";
+        let maksLengde = 110;
+
+        function printText() {
+            let result = text;
+            for (let i = text.length; result.length < maksLengde; i++) {
+                result += text; 
+                console.log(result); 
+            }
+        }
+    </script>
+</body>
+</html>

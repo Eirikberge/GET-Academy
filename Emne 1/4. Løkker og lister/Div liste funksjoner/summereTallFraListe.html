@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // model
+        let numbers = [1, 2, 3, 4, 5];
+        // view
+        updateView();
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <h4>Liste:</h4>
+            <p>${numbers}</p>
+            <button onclick="secondSumList()">Rekke med tall</button>
+            <button onclick="thirdSumList()">Sum på siden</button>
+            `;
+            // Denne tilhører første funksjon hvor parameter er brukt.
+            // Her vises summen i console automatisk med en gang
+            const resultat = firstSumList(numbers);
+            console.log(resultat);
+
+        }
+
+        // controller
+        function firstSumList(numbers) {
+            let sum = 0;
+            for (let i = 0; i < numbers.length; i++) {
+                sum += numbers[i];
+            }
+            return sum
+        }
+
+
+        // function firstSumList() {
+        //     //Gir sum av tallene i console
+        //     let sum = 0;
+        //     for (let number of numbers) {
+        //         sum += number;
+        //     }
+        //     console.log(sum)
+        // }
+
+        function secondSumList() {
+            // Gir en rekke av tallene i li-tagg på siden
+            let html = '';
+            for (let number of numbers) {
+                html += `<li>${number}</li>`;
+            }
+            document.body.innerHTML = html;
+        }
+        function thirdSumList() {
+            // Gir sum av tallene i li-tagg på siden
+            let html = '';
+            let sum = 0;
+            for (let number of numbers) {
+                sum += number
+                html = `<li>${sum}</li>`;
+            }
+            document.body.innerHTML = html;
+        }
+    </script>
+
+    </script>
+</body>
+
+</html>

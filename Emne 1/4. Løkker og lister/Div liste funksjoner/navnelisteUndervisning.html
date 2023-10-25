@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h3>Navn</h3>
+    <ol id="nameList"></ol>
+
+    <script>
+        // model
+        let names = ['Per', 'Pål', 'Espen'];
+        // let names = [];
+        // names[0] = 'Per'
+        // names[1] = 'Pål'
+        // names[2] = 'Espen'
+
+        //View
+        updateView();
+        function updateView() {
+            let html = "";
+            // for (let name of names) {
+            for (i = 0; i < names.length; i++) {
+                const name = names[i];
+                html += /*HTML*/`
+        <li>
+            ${name}
+            <button onclick="deleteName(${i})">Bytt navn til Eirik</button>
+            <button onclick="addName(${i})">Legg til navn Eirik</button>
+        </li>
+    `;
+            }
+            document.getElementById('nameList').innerHTML = html;
+        }
+
+        //controller
+        function deleteName(index) {
+            names.splice(index, 1, 'Eirik');
+            updateView();
+        }
+        function addName(index) {
+            names.splice(index, 0, 'Eirik');
+            updateView();
+        }
+    </script>
+
+</body>
+
+</html>

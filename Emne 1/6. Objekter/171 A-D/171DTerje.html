@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #mainDiv {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // model
+        let color1 = { red: 0, green: 100, blue: 250 };
+        let color2 = { red: 190, green: 20, blue: 50 };
+
+        // view
+        updateView();
+        function updateView() {
+            let colors = getColorsGradient(color1, color2);
+            let html = '';
+            for(let color of colors ){
+                html += createHtmlForColor(color);
+            }
+
+            document.getElementById('app').innerHTML = /*HTML*/`
+                Color 1:
+                ${createHtmlForColor(color1)}
+                Color 2:
+                ${createHtmlForColor(color2)}
+                <hr/>
+                ${html}
+            `;
+        }
+
+        function getColorsGradient(color1, color2){
+            let colors = [];
+            let currentColor = {red: color1.red, green: color1.green, blue: color1.blue};
+            colors.push(color1);
+            let changeRed = (color2.red - color1.red)/4;
+            let changeGreen = (color2.green - color1.green)/4;
+            let changeBlue = (color2.blue - color1.blue)/4;
+            for(let index = 0; index < 4; index++){
+                currentColor.red += changeRed;
+                currentColor.green += changeGreen;
+                currentColor.blue += changeBlue;
+                colors.push({...currentColor});
+            }
+
+            return colors;
+        }
+
+        function createHtmlForColor(color) {
+            return /*HTML*/`
+                    <div 
+                        id="mainDiv" 
+                        style="background-color: rgb( ${color.red}, ${color.green}, ${color.blue});">
+                        
+                    </div>
+            `;
+        }
+
+
+    </script>
+</body>
+
+</html

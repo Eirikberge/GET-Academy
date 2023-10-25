@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #mainDiv {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // model
+        let color1 = { red: 100, green: 200, blue: 50 }
+        let color2 = invertedColor(color1)
+        let color3 = getAverageColor(color1, color2)
+
+
+        // view
+        updateView();
+        function updateView() {
+            let colors = getColors(color1, color2, color3)
+            let html = '';
+            for (let color of colors) {
+                html += createHtmlForColors(color1, color2, color3)
+            }
+
+            document.getElementById('app').innerHTML = /*HTML*/`
+            Color 1:
+            ${createHtmlForColors(color1)}
+            Color 2:
+            ${createHtmlForColors(color2)}
+            Color 3:
+            ${createHtmlForColors(color3)}
+            `;
+
+        }
+        function createHtmlForColors(color) {
+            return /*HTML*/`
+            <div 
+                id="mainDiv"
+                style="background-color: rgb( ${color.red}, ${color.green}, ${color.blue});">
+            </div>
+
+            `;
+        }
+
+        function getColors(color1, color2, color3){
+            let colors = [];
+            return colors;
+        }
+
+        // controller
+        function invertedColor(color) {
+            return {
+                red: 255 - color.red,
+                green: 255 - color.green,
+                blue: 255 - color.blue,
+            };
+        }
+
+        
+        function getAverageColor(color1, color2) {
+            return {
+                red: getAverage(color1.red, color2.red),
+                green: getAverage(color1.green, color2.green),
+                blue: getAverage(color1.blue, color2.blue),
+            };
+        }
+        
+        function getAverage(value1, value2){
+            return ((value1 + value2)/2)
+        }
+
+    </script>
+</body>
+
+</html

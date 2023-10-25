@@ -36,6 +36,15 @@
 </head>
 
 <body>
+    DRY-prinsippet
+    Don't Repeat Yourself
+
+    <h3>
+        JavaScript
+    </h3>
+    <li>Endre HTML av en tag ut fra id</li>
+    <li>Lage egne kommandoer, dvs. funksjoner</li>
+    <li>onclick</li>
 
     <div id="app">
     </div>
@@ -85,24 +94,19 @@
                 <div class="square">
                     ${img3html}
                 </div>
-                    <div class="square">
-                        ${img4html}
-                    </div>
+                <div class="square">
+                    ${img4html}
+                </div>
             </div>
             <div class="buttons">
-                <button onclick="moveButtons(-2)"${disabledUp}>▲</button>
+                <button onclick="moveButtons('up')"${disabledUp}>▲</button>
                 <div>
-                    <button onclick="moveButtons(-1)"${disabledLeft}>◀</button>
-                    <button onclick="moveButtons(1)"${disabledRight}>▶</button>
+                    <button onclick="moveButtons('left')"${disabledLeft}>◀</button>
+                    <button onclick="moveButtons('right')"${disabledRight}>▶</button>
                 </div>
-                <button onclick="moveButtons(2)"${disabledDown}>▼</button>
+                <button onclick="moveButtons('down')"${disabledDown}>▼</button>
             </div>
             `;
-        }
-
-        function moveButtons(change){
-            index += change;
-            updateView();
         }
 
         // function right() {
@@ -121,6 +125,23 @@
         //     index += 2;
         //     updateView()
         // }
+
+        function moveButtons(direction){
+            if (direction === "right") {
+                index ++;
+            }
+            else if (direction === "left") {
+                index--;
+            } 
+            else if (direction === "up") {
+                index-=2;
+            }
+            else if (direction === "down") {
+                index+=2;
+            }
+            updateView();
+
+        }
 
     </script>
 </body>

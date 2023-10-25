@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="sumList()">klikk</button>
+    <script>
+        function sumList(){
+
+            let numbers = [1, 2, 3, 4, 5];
+            let sum = 0;
+            
+            for(let number of numbers){
+                sum += number;
+            }
+            console.log(sum)
+        }
+        
+        // for (let number of numbers){
+            //     console.log(number);
+            // }
+            
+            // for (let i = 0; i < numbers.length; i++){
+                //     let number = numbers[i]
+                //     console.log(`${number}`);
+                // }
+
+        // let html = '';
+        // for (let number of numbers) {
+        //     html += `<li>${number}</li>`;
+
+        // }
+        // document.body.innerHTML = html;
+        function summerListe(liste) {
+        let sum = 0;
+        for (let i = 0; i < liste.length; i++) {
+            sum += liste[i];
+        }
+        console.log(sum)
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: rgba(0, 0, 0, 0.793);
+            color: white;
+            font-size: 125%;
+        }
+
+        table,tr,td,th {
+            border: 1px solid darkgray;
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            padding: 4px;
+        }
+
+        th {
+            background-color: darkblue;
+            border: 1px solid darkblue;
+            color: white;
+        }
+
+        tr:nth-child(1) {
+            background-color: darkblue;
+        }
+        input, button {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="tasksTable">
+    </table>
+    <p>
+        <input type="text" id="taskDescription" placeholder="Oppgave" />
+        <input type="text" id="responsible" placeholder="Ansvarlig" />
+        <input type="date" id="dueDate"/>
+        <button onclick="addTask()">Legg til oppgave</button><br>
+    </p>
+    <script>
+        let currentPage = 1;
+        const tasksPerPage = 10;
+
+        let tasks = [
+            { description: 'Handle til middag', isDone: true, responsible: 'Martin', dueDate: '2023-10-12'},
+            { description: 'Lage middag', isDone: false },
+            // Legg til flere oppgaver her...
+        ]
+
+        let tasksTable = document.getElementById('tasksTable');
+        updateView();
+
+        function updateView() {
+            let startIndex = (currentPage - 1) * tasksPerPage;
+            let endIndex = startIndex + tasksPerPage;
+
+            let html = `
+            <tr>
+                <th>Oppgave</th>
+                <th>Gjort</th>
+                <th>Ansvarlig</th>
+                <th>Når gjort</th>
+                <th></th>
+            </tr>`;
+
+            for (let i = startIndex; i < endIndex && i < tasks.length; i++) {
+                html += createHtmlRow(i);
+            }
+
+            tasksTable.innerHTML = html;
+            addPaginationButtons();
+        }
+
+        function createHtmlRow(i) {
+            const task = tasks[i];
+            const checkedHtml = task.isDone ? 'checked="checked"' : '';
+            const responsibleHtml = task.responsible || '';
+            const dueDateHtml = task.dueDate || '';
+            if (!task.editMode) return `<tr>
+                            <td>${task.description} </td>
+                            <td><input onchange="changeIsDone(this, ${i})" type="checkbox" ${checkedHtml} /></td>
+                            <td>${responsibleHtml}</td>
+                            <td>${dueDateHtml}</td>
+                            <td>
+                                <button onclick="deleteTask(${i})">Slett</button>
+                                <button onclick="editTask(${i})">Rediger</button>
+                            </td>
+                        </tr>
+                            `;
+            return `<tr>
+                            <td><input id="editDescription${i}" type="text" value="${task.description}"/> </td>
+                            <td><input onchange="changeIsDone(this, ${i})" type="checkbox" ${checkedHtml} /></td>
+                            <td><input id="editResponsible${i}" type="text" value="${responsibleHtml}"/> </td>
+                            <td><input id="editDueDate${i}" type="date" value="${dueDateHtml}"/> </td>
+                            <td>
+                                <button onclick="deleteTask(${i})">Slett</button>
+                                <button onclick="updateTask(${i})">Lagre</button>
+                            </td>
+                        </tr>
+                            `;
+        }
+
+        let taskDescriptionInput = document.getElementById('taskDescription');
+        let responsibleInput = document.getElementById('responsible');
+        let dueDateInput = document.getElementById('dueDate')
+
+        function addTask() {
+            tasks.push({
+                description: taskDescriptionInput.value,
+                isDone: false,
+                responsible : responsibleInput.value,
+                dueDate : dueDateInput.value,
+            });
+            taskDescriptionInput.value = '';
+            responsibleInput.value = '';
+            dueDateInput.value = '';
+            updateView();
+        }
+
+        function changeIsDone(checkbox, index) {
+            tasks[index].isDone = checkbox.checked;
+            updateView();
+        }
+
+        function deleteTask(index) {
+            tasks.splice(index, 1)
+            updateView();
+        }
+
+        function editTask(index) {
+            tasks[index].editMode = true;
+            updateView();
+        }
+
+        function updateTask(index) {
+            const idTask = `editDescription${index}`;
+            const inputTaskTag = document.getElementById(idTask);
+            const idName = `editResponsible${index}`;
+            const inputNameTag = document.getElementById(idName);
+            const task = tasks[index];
+            const idDate = `editDueDate${index}`;
+            const inputDateTag = document.getElementById(idDate)
+            task.description = inputTaskTag.value;
+            task.responsible = inputNameTag.value;
+            task.dueDate = inputDateTag.value;
+            task.editMode = false;
+            updateView();
+        }
+
+        function addPaginationButtons() {
+            const totalPages = Math.ceil(tasks.length / tasksPerPage);
+
+            let paginationHtml = '<div class="pagination">';
+            for (let i = 1; i <= totalPages; i++) {
+                paginationHtml += `<button onclick="changePage(${i})" ${i === currentPage ? 'class="active"' : ''}>${i}</button>`;
+            }
+            paginationHtml += '</div>';
+
+            tasksTable.innerHTML += paginationHtml;
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            updateView();
+        }
+    </script>
+</body>
+
+</html>

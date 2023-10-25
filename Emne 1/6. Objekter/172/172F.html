@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: rgba(0, 0, 0, 0.793);
+            color: white;
+            font-size: 125%;
+        }
+
+        table,
+        tr,
+        td,
+        th {
+            border: 1px solid darkgray;
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            padding: 4px;
+        }
+
+        th {
+            background-color: darkblue;
+            border: 1px solid darkblue;
+            color: white;
+        }
+
+        tr:nth-child(1) {
+            background-color: darkblue;
+        }
+
+        input,
+        button {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="tasksTable">
+    </table>
+    <p>
+        <input type="text" id="taskDescription" placeholder="Oppgave" />
+        <input type="text" id="responsible" placeholder="Ansvarlig" />
+        <input type="date" id="dueDate" />
+        <button onclick="addTask()">Legg til oppgave</button><br>
+    </p>
+    <script>
+        // model
+        let pageIndex = 0;
+        let tasks = [
+            { description: 'Handle til middag', isDone: true, responsible: 'Eirik', dueDate: '2023-10-12' },
+            { description: 'Lage middag', isDone: true, responsible: 'Martin', dueDate: '2023-10-12' },
+            { description: 'Vaske', isDone: false, responsible: 'Mor', dueDate: '2023-10-12' },
+            { description: 'Rydde', isDone: false, responsible: 'Far', dueDate: '2023-10-12' },
+        ]
+
+        // view
+        let tasksTable = document.getElementById('tasksTable');
+        updateView();
+        function updateView() {
+            const result = createHtmlRow();
+            const pages = createPagingHtml(10);
+            const newValues = skipAndTake(result, pageIndex, 2);
+            let html = `
+            <tr>
+                <th>Oppgave</th>
+                <th>Gjort</th>
+                <th>Ansvarlig ${createResponsibleSelectHtml()}</th>
+                <th>Når gjort</th>
+                <th></th>
+            </tr>`;
+            for (let i = 0; i < tasks.length; i++) {
+                html += createHtmlRow(i);
+            }
+            tasksTable.innerHTML = html;
+        }
+
+        function createHtmlRow(i) {
+            const task = tasks[i];
+            const checkedHtml = task.isDone ? 'checked="checked"' : '';
+            const responsibleHtml = task.responsible || '';
+            const dueDateHtml = task.dueDate || '';
+            if (!task.editMode) return `<tr>
+                            <td>${task.description} </td>
+                            <td><input onchange="changeIsDone(this, ${i})" type="checkbox" ${checkedHtml} /></td>
+                            <td>${responsibleHtml}</td>
+                            <td>${dueDateHtml}</td>
+                            <td>
+                                <button onclick="deleteTask(${i})">Slett</button>
+                                <button onclick="editTask(${i})">Rediger</button>
+                            </td>
+                        </tr>
+                        ${pages}
+                            `;
+            return `<tr>
+                            <td><input id="editDescription${i}" type="text" value="${task.description}"/> </td>
+                            <td><input onchange="changeIsDone(this, ${i})" type="checkbox" ${checkedHtml} /></td>
+                            <td><input id="editResponsible${i}" type="text" value="${responsibleHtml}"/> </td>
+                            <td><input id="editDueDate${i}" type="date" value="${dueDateHtml}"/> </td>
+                            <td>
+                                <button onclick="deleteTask(${i})">Slett</button>
+                                <button onclick="updateTask(${i})">Lagre</button>
+                            </td>
+                        </tr>
+                        ${pages}
+                            `;
+        }
+        function createResponsibleSelectHtml() {
+            const responsibles = tasks.map(task => task.responsible).filter(responsible => responsible); // Hent ansvarlige fra oppgavene og fjern tomme verdier
+            // const responsibles = tasks.resoponsible;
+            let optionsHtml = '';
+            for (let resoponsible of responsibles) {
+                optionsHtml += /*HTML*/`
+                <option>${resoponsible}</option>
+                `;
+            }
+            return /*HTML*/`
+            <select onchange="">
+                <option>Vis alle</option>
+                ${optionsHtml}
+            </select>
+            `;
+        }
+
+
+        // controller
+        let taskDescriptionInput = document.getElementById('taskDescription');
+        let responsibleInput = document.getElementById('responsible');
+        let dueDateInput = document.getElementById('dueDate')
+        function addTask() {
+            tasks.push({
+                description: taskDescriptionInput.value,
+                isDone: false,
+                responsible: responsibleInput.value,
+                dueDate: dueDateInput.value,
+            });
+            taskDescriptionInput.value = '';
+            responsibleInput.value = '';
+            dueDateInput.value = '';
+            updateView();
+        }
+
+        function changeIsDone(checkbox, index) {
+            tasks[index].isDone = checkbox.checked;
+            updateView();
+        }
+
+        function deleteTask(index) {
+            tasks.splice(index, 1)
+            updateView();
+        }
+        function editTask(index) {
+            tasks[index].editMode = true;
+            updateView();
+        }
+
+        function updateTask(index) {
+            const idTask = `editDescription${index}`;
+            const inputTaskTag = document.getElementById(idTask);
+            const idName = `editResponsible${index}`;
+            const inputNameTag = document.getElementById(idName);
+            const task = tasks[index];
+            const idDate = `editDueDate${index}`;
+            const inputDateTag = document.getElementById(idDate)
+            task.description = inputTaskTag.value;
+            task.responsible = inputNameTag.value;
+            task.dueDate = inputDateTag.value;
+            task.editMode = false;
+            updateView();
+        }
+
+        function skipAndTake(values, pageIndex, pageSize) {
+            let newValues = [];
+            let skipCount = pageIndex * pageSize;
+            let takeCount = pageSize;
+
+            for (let value of values) {
+                skipCount--;
+                if (skipCount >= 0) continue;
+                if (takeCount <= 0) break;
+                takeCount--;
+                newValues.push(value);
+            }
+
+            return newValues;
+        }
+
+        function createPagingHtml(pageSize) {
+            const result = oneToThousand();
+            let html = '';
+            let pageCount = Math.ceil(result.length / pageSize);
+
+            for (let pageNo = 1; pageNo <= pageCount; pageNo++) {
+                html += `<a href="javascript:goToPage(${pageNo})">${pageNo}</a> `;
+            }
+
+            return html;
+        }
+        function goToPage(pageNo) {
+            pageIndex = pageNo - 1;
+            updateView();
+        }
+    </script>
+</body>
+
+</html>

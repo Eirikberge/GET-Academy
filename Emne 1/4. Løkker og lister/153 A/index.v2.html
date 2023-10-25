@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+     </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        // model
+        let pageIndex = 0;
+        const pageSize = 10
+
+        // view
+        updateView();
+
+        function updateView() {
+            let html = '';
+            const values = oneToHundred();
+            const pagingHtml = createPagingHtml();
+            const newValues = skipAndTake(values, pageIndex, pageSize);
+
+            for (let number of newValues) {
+                html += `<li>${number}</li>`;
+            }
+
+            document.getElementById('app').innerHTML = `
+                <ul>
+                    ${html}
+                </ul>
+                ${pagingHtml}
+            `;
+        }
+
+        // controller
+        function oneToHundred() {
+            let numbers = [];
+            for (let i = 1; i <= 100; i++) {
+                numbers.push(i);
+            }
+            return numbers;
+        } 
+
+        function skipAndTake(values, pageIndex, pageSize) {
+            let newValues = [];
+            let skipCount = pageIndex * pageSize;
+            let takeCount = pageSize;
+
+            for (let value of values) {
+                skipCount--;
+                if (skipCount >= 0) continue;
+                if (takeCount <= 0) break;
+                takeCount--;
+                newValues.push(value);
+            }
+
+            return newValues;
+        }
+        function createPagingHtml() {
+            const numbers = oneToHundred();
+            let html = '';
+            let pageCount = Math.ceil(numbers.length / pageSize);
+
+            for (let pageNo = 1; pageNo <= pageCount; pageNo++) {
+                html += `<a href="javascript:goToPage(${pageNo})">${pageNo}</a> `;
+            }
+
+            return html;
+        }
+
+        function goToPage(pageNo) {
+            pageIndex = pageNo - 1;
+            updateView();
+        }
+    </script>
+</body>
+</html>

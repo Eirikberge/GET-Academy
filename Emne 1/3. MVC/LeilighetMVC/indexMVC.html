@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: white;
+            color: blue;
+            font-size: 50px;
+            margin: 4%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+    </div>
+
+    <script>
+
+        // model
+        let index = 1;
+
+        //View
+        updateView();
+        function updateView() {
+            let htmlText;
+            let buttonText = ""
+            let buttonText2 = ""
+            let buttonText3 = ""
+            let buttonText4 = ""
+            if (index == '1') {
+                htmlText = "Du er utenfor leiligheten"
+                buttonText = "<button onclick='moveAround(2)'>Gå inn</button>"
+            }
+            if (index == '2') {
+                htmlText = "Du er i gangen"
+                buttonText = "<button onclick='moveAround(1)'>Gå ut</button>"
+                buttonText2 = "<button onclick='moveAround(3)'>Gå til stua</button>"
+                buttonText3 = "<button onclick='moveAround(4)'>Gå til soverommet</button>"
+                buttonText4 = "<button onclick='moveAround(5)'>Gå til badet</button>"
+            }
+            if (index == '3') {
+                htmlText = "Du er i stua"
+                buttonText = "<button onclick='moveAround(2)'>Gå til gangen</button>"
+                buttonText2 = "<button onclick='moveAround(5)'>Gå til badet</button>"
+            }
+            if (index == '4') {
+                htmlText = "Du er på soverommet"
+                buttonText = "<button onclick='moveAround(2)'>Gå til gangen</button>"
+            }
+            if (index == '5') {
+                htmlText = "Du er på badet"
+                buttonText = "<button onclick='moveAround(2)'>Gå til gangen</button>"
+                buttonText2 = "<button onclick='moveAround(3)'>Gå til stua</button>"
+            }
+            document.getElementById('app').innerHTML = /*HTML*/`
+                <div>
+                    ${htmlText}
+                </div>
+                <div>
+                    ${buttonText}
+                    ${buttonText2}
+                    ${buttonText3}
+                    ${buttonText4}
+                </div>
+                `;
+        }
+
+        //controller
+        function moveAround(room) {
+            index = room
+            updateView();
+        }
+
+
+    </script>
+</body>
+
+</html>

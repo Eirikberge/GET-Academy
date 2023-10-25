@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app {
+            display: grid;
+            grid-template-columns: repeat(3, 5rem);
+            grid-template-rows: repeat(3, 5rem);
+        }
+
+        #app>div {
+            border: 1px solid gray;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // model
+        let numbers = [1, 2, 5, 7, null, 3, 4, 8, 6];
+        // view
+        updateView();
+        function updateView() {
+            let html = '';
+            for (let i = 0; i < 9; i++) {
+
+                html += `<div onclick="changeCell(${i})">${numbers[i] !== null ? numbers[i] : ''}</div>`;
+            }
+            document.getElementById('app').innerHTML = html
+
+                ;
+
+        }
+        // skal kun flytte med  1, -1, 3 og -3
+
+        // controller
+        function changeCell(index) {
+            const emptyIndex = numbers.indexOf(null);
+            const diff = index - emptyIndex;
+            if (diff === 1 || diff === -1 || diff === 3 || diff === -3){
+                [numbers[index], numbers[emptyIndex]] = [numbers[emptyIndex], numbers[index]];
+                updateView();
+            }
+            
+        }
+    </script>
+</body>
+
+</html>

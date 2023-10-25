@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #board {
+            display: grid;
+            grid-template-columns: repeat(8, 100px);
+            grid-template-rows: repeat(8, 100px);
+        }
+
+        #board>div {
+            border: 1px solid lightblue;
+        }
+
+        .selected {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="board">
+    </div>
+    <script>
+        let selectedSquareIndex = 7;
+        const size = 64;
+        const pattern = '<div></div>';
+
+        showBoard();
+
+        function showBoard() {
+            // del 1: alle rutene som ikke er valgt før den valgte
+            const lengthPart1 = selectedSquareIndex;
+            // del 2: den valgte ruten
+            const part2 = '<div class="selected"></div>';
+
+            // del 3  alle rutene som ikke er valgt etter den valgte
+            const lengthPart3 = size - (selectedSquareIndex + 1);
+            document.getElementById('board').innerHTML = addEmptySquare(lengthPart1) + part2 + addEmptySquare(lengthPart3);
+        }
+
+        function addEmptySquare (change){
+
+            return ''.padEnd(pattern.length * change, pattern)
+
+        }
+
+        function goUp() {
+            selectedSquareIndex -= 8;
+            showBoard()
+        }
+        function goLeft() {
+            selectedSquareIndex--;
+            showBoard()
+        }
+        function goRight() {
+            selectedSquareIndex++;
+            showBoard()
+        }
+        function goDown() {
+            selectedSquareIndex += 8;
+            showBoard()
+        }
+    </script>
+
+    <button onclick="goUp()">▲</button>
+    <button onclick="goLeft()">◀</button>
+    <button onclick="goRight()">▶</button>
+    <button onclick="goDown()">▼</button>
+</body>
+
+
+</html>

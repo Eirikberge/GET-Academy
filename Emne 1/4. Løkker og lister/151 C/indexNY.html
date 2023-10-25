@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // model
+        let resultText = "";
+
+        // view
+        updateView();
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <label for="putInWord">Skriv inn tekst:</label>
+            <input oninput="inputText=this.value" type="text" id="putInWord" placeholder="Skriv inn tekst her">
+
+            <button onclick="reversedText()">Få teksten baklengs</button>
+            <br>
+            <p>${resultText}</p>
+            `;
+            
+        }
+
+        // controller
+
+        function reversedText(){
+            let reversedText = "";
+            for (let i = inputText.length - 1 ; i >= 0; i--){
+                let letter = inputText.charAt(i);
+                reversedText += letter;
+            }
+            resultText = reversedText;
+            updateView();
+        }
+
+
+    </script>
+</body>
+
+</html>

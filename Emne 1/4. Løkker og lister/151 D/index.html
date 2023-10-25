@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        // model
+        let inputText = '';
+        let letterCount = '';
+        let inputLetter = '';
+        // SKAL LEGGE INN AT DIVEN I UPDATEvIEW IKKE SYNES FØR RESULTATET
+        // LEGGE INN AT MAN KAN VELGE MELLOM STORE OG SMÅ BOKSTAVER
+        // view
+        updateView();
+        function updateView() {
+            let resultDiv = '';
+            if (inputText != '') {
+                resultDiv = /*HTML*/`
+                    <div>
+                        Det er ${letterCount} av bokstaven ${inputLetter}
+                    </div>
+                `;
+            }
+            document.getElementById('app').innerHTML = /*HTML*/`
+            
+            <textarea id="inputText" rows="10" cols="50">${inputText}</textarea>
+            <br/>
+            <label for="inputLetter"></label>
+            <input type="text" id="inputLetter" placeholder="Skriv inn bokstav her" value="${inputLetter}"><br>
+            <button onclick="checkLetters()">Se antall bokstaver</button>
+            <button onclick="cleanSite()">Null ut</button>
+            
+            ${resultDiv}
+
+            
+            `;
+        }
+
+        // controller
+        function checkLetters() {
+            inputText = document.getElementById("inputText").value;
+            inputLetter = document.getElementById("inputLetter").value;
+
+            letterCount = 0;
+            inputText = inputText.toLowerCase();
+            for (let index = 0; index < inputText.length; index++) {
+                let letter = inputText.charAt(index);
+                if (letter === inputLetter) {
+                    letterCount++
+
+                }
+            }
+
+            updateView();
+        }
+        function cleanSite() {
+            inputText = '';
+            letterCount = '';
+            inputLetter = '';
+
+            updateView();
+        }
+
+    </script>
+</body>
+
+</html>

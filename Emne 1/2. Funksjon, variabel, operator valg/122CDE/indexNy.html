@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #content {
+            font-size: 16pt;
+            margin: 20px;
+        }
+
+        button {
+            margin: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="app">
+    </div>
+
+    
+    <script>
+
+        //model
+        let fontSize = 16;
+        let fontFamily = 'Arial';
+        let redValue = 100;
+        let greenValue = 100;
+        let blueValue = 100;
+
+
+        //View
+        updateView()
+        function updateView(){
+            document.getElementById('app').innerHTML = /*HTML*/`
+
+            Dette er en tekst
+
+            <select id="userFontChoice" onchange="selectFontFamily(this.value)">
+        <option>Arial</option>
+        <option>Verdana</option>
+        <option>Tahoma</option>
+        <option>Trebuchet MS</option>
+        <option>Times New Roman</option>
+        <option>Georgia</option>
+        <option>Garamond</option>
+        <option>Courier New</option>
+        <option>Brush Script MT</option>
+            </select>
+            
+                <button onclick="changeFontSize(5)">Større</button>
+                <button onclick="changeFontSize(-5)">Mindre</button>
+                <button onclick="changeColors(50, 0 ,0)">Mer rød</button>
+                <button onclick="changeColors(0, 50 ,0)">Mer grønn</button>
+                <button onclick="changeColors(0, 0, 50)">Mer blå</button>
+            `;
+
+            const style = document.getElementById('app').style;
+            style.backgroundColor =`rgb(${redValue}, ${greenValue}, ${blueValue})`;
+            style.fontFamily = fontFamily;
+            style.fontSize = fontSize + `pt`;
+            
+        }
+     
+        //controller
+        function changeFontSize(change) {
+            fontSize += change;
+            updateView();
+        }
+
+        function selectFontFamily(newFontFamily){
+            fontFamily = newFontFamily;
+            updateView();
+        }   
+
+        function changeColors(changeRed , changeGreen, changeBlue){
+            redValue += changeRed;
+            greenValue += changeGreen;
+            blueValue += changeBlue;
+            updateView();
+        }
+
+    </script>
+
+</body>
+
+</html>
+
+</html>

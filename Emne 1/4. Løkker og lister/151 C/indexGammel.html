@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <label for="putInWord">Skriv inn tekst:</label>
+    <input type="text" id="putInWord" placeholder="Skriv inn tekst her">
+
+    <button onclick="reversedText()">Få teksten baklengs</button>
+
+    <div id="resultatTekst"></div>
+
+    <script>
+
+        // function reversedText(text) {
+        //     let reversedText = "";
+        //     for (let index = 0; index < text.length; index++) {
+        //         let letter = text.charAt(index);
+        //         reversedText = letter + reversedText;
+        //     }
+        //     return reversedText;
+        // }
+
+        // function reversedText(text) {
+        //     let reversedText = "";
+        //     for (let index = text.length - 1; index >= 0; index--) {
+        //         let letter = text.charAt(index);
+        //         reversedText += letter;
+        //     }
+        //     return reversedText;
+
+        // }
+        function reversedText() {
+            let inputText = document.getElementById("putInWord").value;
+
+            let reversedText = "";
+            for (let index = inputText.length - 1; index >= 0; index--) {
+                let letter = inputText.charAt(index);
+                reversedText += letter;
+            }
+
+            document.getElementById("resultatTekst").innerHTML = reversedText;
+        }
+
+    </script>
+</body>
+
+</html>

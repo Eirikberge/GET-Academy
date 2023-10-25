@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function checkLetters(findLetter){
+
+            let text = 'Det var en gang. A';
+            let letterCount = 0;
+            text = text.toLowerCase();
+
+            for (let index = 0; index < text.length; index++) {
+                let letter = text.charAt(index);
+                if(letter === findLetter){
+                    if(letter == a){
+                        letterCount++
+                    }
+                }
+            }
+
+            console.log(letterCount)
+        }
+        // function checkLetters(findLetter){
+
+        //     let text = 'Det var en gang. A';
+        //     let letterCount = 0;
+        //     text = text.toLowerCase();
+
+        //     for (let index = 0; index < text.length; index++) {
+        //         let letter = text.charAt(index);
+        //         if(letter === findLetter){
+        //             letterCount++
+        //         }
+        //     }
+
+        //     return letterCount
+        // }
+
+
+        // function checkLetters(){
+
+        //     let text = 'Det var en gang. A';
+        //     let letterCount = 0;
+        //     text = text.toLowerCase();
+        //     for (let index = 0; index < text.length; index++) {
+        //         let letter = text.charAt(index);
+        //         if(letter === 'a'){
+        //             letterCount++
+        //         }
+        //         // else if(letter ==='A'){
+        //         //     letterCount++
+        //         // }
+        //     }
+        //     return letterCount
+        // }
+
+    </script>
+    <button></button>
+</body>
+</html>
